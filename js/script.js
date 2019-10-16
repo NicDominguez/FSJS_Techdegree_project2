@@ -117,6 +117,9 @@ const searchInput = document.querySelectorAll(".student-search > input")[0]
 
 // Creates click event listner on search button
 searchBtn.addEventListener("click", () => {
+   
+   removeNoResults()
+
 
    // Selects value of search input
    let input = searchInput.value
@@ -129,6 +132,8 @@ searchBtn.addEventListener("click", () => {
       let studentDetails = studentList[i].childNodes[1]
       // Selects the text string of the student name in the student details div
       let studentName = studentDetails.childNodes[3].textContent
+
+
 
       // Creates condition to set LI to display "block" if included in search input and "none" if not
       if (studentName.includes(input)) {
@@ -163,6 +168,8 @@ searchBtn.addEventListener("click", () => {
 // Creates keyup event listner on search input
 searchInput.addEventListener("keyup", () => {
    
+   removeNoResults()
+
    // Selects value of search input
    let input = searchInput.value
 
@@ -219,6 +226,7 @@ const noResults = () => {
    noResultsLI.setAttribute("id", "no-results")
 }
 
+// Removes "no-results LI from page"
 const removeNoResults = () => {
    let noResultsLI = document.getElementById("no-results")
    if(noResultsLI !== null) {
@@ -231,8 +239,8 @@ const removeNoResults = () => {
 const removePagination = () => {
    // Sets variable to select the pagination DIV
    let paginationDIV = document.getElementsByClassName("pagination")[0]
-   // Removes the pagination DIV from the page
-   paginationDIV.parentNode.removeChild(paginationDIV)
+   // Removes the pagination DIV from the page if it exists
+   if (paginationDIV) {paginationDIV.parentNode.removeChild(paginationDIV)}
 }
 
 
