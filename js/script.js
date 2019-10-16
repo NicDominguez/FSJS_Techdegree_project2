@@ -1,22 +1,3 @@
-/******************************************
-Treehouse Techdegree:
-FSJS project 2 - List Filter and Pagination
-******************************************/
-   
-// Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
-
-
-/*** 
-   Add your global variables that store the DOM elements you will 
-   need to reference and/or manipulate. 
-   
-   But be mindful of which variables should be global and which 
-   should be locally scoped to one of the two main functions you're 
-   going to create. A good general rule of thumb is if the variable 
-   will only be used inside of a function, then it can be locally 
-   scoped to that function.
-***/
-
 // GLOBAL VARIABLES
 
 // Selects UL containing all student list items
@@ -25,6 +6,10 @@ const studentUL = document.getElementsByClassName("student-list")[0]
 const studentList = studentUL.children
 // Selects page div container for all single page elements
 const pageDIV = document.getElementsByClassName("page")[0]
+// Sets variable to select page header
+const pageHeader = document.getElementsByClassName("page-header")[0]
+// Creates search bar DIV element
+const searchBarDIV = document.createElement("div")
 
 // MAIN FUNCTIONS
 
@@ -86,16 +71,9 @@ const appendPageLinks = (list) => {
    
 }
 
-// Runs showPageLInks and showPage functions for first page on page load
-appendPageLinks(studentList)
-showPage(studentList, 1)
 
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
 
-// Sets variable to select page header
-const pageHeader = document.getElementsByClassName("page-header")[0]
-// Creates search bar DIV element
-const searchBarDIV = document.createElement("div")
+
  
 // Adds "sudent-search" class to search bar div
 searchBarDIV.classList.add("student-search")
@@ -118,22 +96,18 @@ const searchInput = document.querySelectorAll(".student-search > input")[0]
 // Creates click event listner on search button
 searchBtn.addEventListener("click", () => {
    
+   // Removes "no-results" LI from student list
    removeNoResults()
-
 
    // Selects value of search input
    let input = searchInput.value
    
-
-
    // Loops through full student LI list 
    for (let i = 0; i < studentList.length; i++) {
       // Selects sudent details div
       let studentDetails = studentList[i].childNodes[1]
       // Selects the text string of the student name in the student details div
       let studentName = studentDetails.childNodes[3].textContent
-
-
 
       // Creates condition to set LI to display "block" if included in search input and "none" if not
       if (studentName.includes(input)) {
@@ -162,18 +136,16 @@ searchBtn.addEventListener("click", () => {
    } else {
       noResults()
    }
-
 })
 
 // Creates keyup event listner on search input
 searchInput.addEventListener("keyup", () => {
    
+   // Removes "no-results" LI from student list
    removeNoResults()
 
    // Selects value of search input
    let input = searchInput.value
-
-
 
    // Loops through full student LI list 
    for (let i = 0; i < studentList.length; i++) {
@@ -200,7 +172,6 @@ searchInput.addEventListener("keyup", () => {
       return item.style.display === "block"
    })
 
-   console.log(filteredList)
    if (filteredList.length > 0) {
       // Runs appendPageLInks and showPage functions on the filtered list
       appendPageLinks(filteredList)
@@ -212,7 +183,6 @@ searchInput.addEventListener("keyup", () => {
    }
 
 })
-
 
 // SUPPORT FUNCTIONS
 
@@ -233,7 +203,6 @@ const removeNoResults = () => {
       noResultsLI.parentNode.removeChild(noResultsLI)
    }
 }
-
 
 // Creates funciton to remove pagination from page
 const removePagination = () => {
