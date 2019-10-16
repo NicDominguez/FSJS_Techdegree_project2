@@ -10,16 +10,32 @@ const pageDIV = document.getElementsByClassName("page")[0]
 const pageHeader = document.getElementsByClassName("page-header")[0]
 // Creates search bar DIV element
 const searchBarDIV = document.createElement("div")
+// Sets variable for number of items per page
+const perPageNum = 10
+
+// ADDED JAVASSCRTIPT ELEMENTS
+
+// Adds "sudent-search" class to search bar div
+searchBarDIV.classList.add("student-search")
+
+// Adds innerHTML to search bar div
+searchBarDIV.innerHTML = `
+         <input placeholder="Search for students...">
+         <button>Search</button>
+   `
+// Appends seaerch bar div to page header
+pageHeader.append(searchBarDIV)
 
 // MAIN FUNCTIONS
 
 // Creates function to show a 10 students on a page
 const showPage = (list, page) => {
+
    // Loops through the selected list and sets display: none to all items
    for (let i = 0; i < list.length; i++) {
       list[i].style.display = "none"
       // Creates the condition for the loop that if the item is in a the range of the selected page then it sets display: block
-      if (i >= (page - 1) * 10 && i<= (page) * 10 - 1 ) {
+      if (i >= (page - 1) * perPageNum && i<= (page) * perPageNum - 1 ) {
          list[i].style.display = "block"
       }
    }
@@ -28,7 +44,7 @@ const showPage = (list, page) => {
 // Creates function to show page links at bottom of page
 const appendPageLinks = (list) => {
    // Sets variable for the total number of pages based on list length
-   let maxPageNum = Math.floor(list.length / 10 + 1)
+   let maxPageNum = Math.floor(list.length / perPageNum + 1)
    // Creates container div for page button UL
    let paginationDIV = document.createElement("div")
    //Creates UL for page button lI elements
@@ -71,20 +87,10 @@ const appendPageLinks = (list) => {
    
 }
 
+// ON PAGE LOAD
 
-
-
- 
-// Adds "sudent-search" class to search bar div
-searchBarDIV.classList.add("student-search")
-
-// Adds innerHTML to search bar div
-searchBarDIV.innerHTML = `
-         <input placeholder="Search for students...">
-         <button>Search</button>
-   `
-// Appends seaerch bar div to page header
-pageHeader.append(searchBarDIV)
+showPage(studentList, 1);
+appendPageLinks(studentList);
 
 // EVENTS
 
